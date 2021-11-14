@@ -19,10 +19,10 @@
 
 terraform {
   backend "s3" {
-    bucket         = "s3buck051121a"
-    key            = "buck/terraform.tfstate"
+    bucket         = "s3buck051121"
+    key            = "main-infra/terraform.tfstate"
     region         = "eu-central-1"
-    #dynamodb_table = "db_terraform_locks"
+    dynamodb_table = "db_terraform_locks"
 
   }
 }
