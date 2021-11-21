@@ -70,6 +70,11 @@ provider "kubernetes" {
   host                   = data.aws_eks_cluster.eks.endpoint
   cluster_ca_certificate = base64decode(data.aws_eks_cluster.eks.certificate_authority[0].data)
   token                  = data.aws_eks_cluster_auth.eks.token
+  exec {
+    api_version = "client.authentication.k8s.io/v1alpha1"
+    args        = ["eks", "get-token", "--cluster-name", var.cluster_name]
+    command     = "aws"
+  }
 
 }
 
@@ -88,11 +93,14 @@ module "eks" {
   subnets         = [aws_subnet.public_subnet.id, aws_subnet.public_subnet1.id]
   cluster_endpoint_public_access = true
 
-  worker_groups_launch_template = [
+  worker_groups = [
+    #_launch_template
     {
       name          = "wg1"
-      instance_type = "t2.micro"
-      asg_desired_capacity = 2
+      instance_type = "t2.medium"
+      asg_desired_capacity = 4
+      asg_max_size  = 5
+      asg_min_size  = 3
       //node_role_arn = aws_iam_role.wg1_role.arn
       additional_security_group_ids = [aws_security_group.main.id]
       public_ip = true
@@ -100,6 +108,11 @@ module "eks" {
 
     }
   ]
+
+//  worker_additional_security_group_ids = [aws_security_group.main.id]
+//  map_roles = var.map_roles
+//  map_users = var.map_users
+//  map_accounts = var.map_accounts
 }
 
 //provider "kubernetes" {
@@ -147,7 +160,7 @@ module "eks" {
 //
 //  scaling_config {
 //    desired_size = 2
-//    max_size = 2
+//    max_size = 4
 //    min_size = 2
 //  }
 //
@@ -155,7 +168,8 @@ module "eks" {
 //  capacity_type = "ON_DEMAND"
 //  disk_size = 20
 //  force_update_version = false
-//  instance_types = ["t2.micro"]
+//  instance_types = ["t2.medium"]
+//
 //  remote_access {
 //    ec2_ssh_key = "aws-key1"
 //    //source_security_group_ids = [aws_security_group.main.id]

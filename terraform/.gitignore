@@ -35,3 +35,4 @@ terraform.rc
 *.lock.*
 variables.tf
 cert/*
+kubeconfig*
