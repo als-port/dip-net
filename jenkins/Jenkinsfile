@@ -1,10 +1,6 @@
 pipeline {
     agent any
     triggers { pollSCM('* * * * *') }
-    options {
-        # buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
-
-    }
     environment {
 		DOCKERHUB_CREDENTIALS=credentials('dockerhub-xs')
 	}
@@ -56,9 +52,5 @@ pipeline {
         }
 	}
 
-#	post {
-#		always {
-#			sh 'docker logout'
-#		}
-#	}
+
 }
