@@ -32,3 +32,9 @@ resource "helm_release" "jenkins" {
     value = "admin"
   }
 }
+
+#https://www.youtube.com/watch?v=2T67_c5YIBQ
+#https://habr.com/ru/post/493580/
+#https://www.youtube.com/watch?v=0D_wKERZ2zo
+#https://github.com/ksemaev/project_template/blob/master/jenkinsfiles/docker_build.jenkins
+#https://github.com/shazforiot/How-to-Push-docker-image-to-Docker-Hub-using-Jenkins-Pipeline/blob/main/Jenkinsfile

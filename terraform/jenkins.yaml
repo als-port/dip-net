@@ -19,7 +19,7 @@ controller:
   # Used for label app.kubernetes.io/component
   componentName: "jenkins-controller"
   image: "jenkins/jenkins"
-  tag: "2.303.1-jdk11"
+  tag: "2.303.3-jdk11"
   imagePullPolicy: "Always"
   imagePullSecretName:
   # Optionally configure lifetime for controller-container
@@ -45,7 +45,7 @@ controller:
   # If you disable the non-Jenkins identity store and instead use the Jenkins internal one,
   # you should revert controller.adminUser to your preferred admin user:
   adminUser: "admin"
-  adminPassword: "Pa55w0rd!"
+  adminPassword: "admin"
   admin:
     existingSecret: ""
     userKey: jenkins-admin-user
@@ -196,7 +196,7 @@ controller:
   # Note if you set this to 'LoadBalancer', you *must* define annotations to secure it. By default
   # this will be an external load balancer and allowing inbound 0.0.0.0/0, a HUGE
   # security risk:  https://github.com/kubernetes/charts/issues/1341
-  agentListenerServiceType: "ClusterIP"
+  agentListenerServiceType: "LoadBalancer"
   # Optionally assign an IP to the LoadBalancer agentListenerService LoadBalancer
   # GKE users: only regional static IPs will work for Service Load balancer.
   agentListenerLoadBalancerIP:
@@ -228,10 +228,12 @@ controller:
 
   # List of plugins to be install during Jenkins controller start
   installPlugins:
-    - kubernetes:1.30.1
+    - kubernetes:1.30.10
     - workflow-aggregator:2.6
-    - git:4.8.2
-    - configuration-as-code:1.52
+    - git:4.10.0
+    - configuration-as-code:1.54
+    - docker-pipeline:1.26
+    - kubernetes-cli:1.10.3
 
   # Set to false to download the minimum required version of all dependencies.
   installLatestPlugins: true

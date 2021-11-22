@@ -1,0 +1,64 @@
+pipeline {
+    agent any
+    triggers { pollSCM('* * * * *') }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        timestamps()
+    }
+    environment {
+		DOCKERHUB_CREDENTIALS=credentials('dockerhub-xs')
+	}
+    stages {
+
+	    stage('gitclone') {
+
+			steps {
+			    echo " ============== gitclone =================="
+				git 'https://github.com/als-port/dip-net.git'
+			}
+		}
+
+		stage('Build') {
+
+			steps {
+			    echo " ============== Build =================="
+			    dir ('app') {
+				    sh 'docker build -t alsxs/nginx:applatest .'
+				}
+			}
+		}
+
+		stage('Login') {
+
+			steps {
+			    echo " ============== Dockerhub login =================="
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}
+
+		stage('Push') {
+
+			steps {
+			    echo " ============== Dockerhub login =================="
+				sh 'docker push alsxs/nginx:applatest'
+				sh 'docker rmi -f alsxs/nginx:applatest'
+			}
+		}
+		stage('Kubernetes') {
+            steps {
+                echo " ============== Change app-deploy =================="
+                withKubeConfig([credentialsId: 'kuber-cred', serverUrl: 'https://53D7F93D6B0A38993DC56FC913D2EF9E.gr7.eu-central-1.eks.amazonaws.com', namespace: "default"]) {
+                    sh "kubectl delete deploy app-deployment"
+                    sh "kubectl delete app-dip"
+                    sh "kubectl apply -f kube/kube_app.yaml"
+                }
+            }
+        }
+	}
+
+	post {
+		always {
+			sh 'docker logout'
+		}
+	}
+}
