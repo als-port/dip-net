@@ -7,11 +7,11 @@ pipeline {
     stages {
 
 	    stage('gitclone') {
-
-			steps {
-			when {
+            when {
                 branch 'main'
             }
+			steps {
+
 			    echo " ============== gitclone =================="
 				git 'https://github.com/als-port/dip-net.git'
 			}
