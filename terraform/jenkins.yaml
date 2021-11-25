@@ -18,9 +18,9 @@ renderHelmLabels: true
 controller:
   # Used for label app.kubernetes.io/component
   componentName: "jenkins-controller"
-  image: "jenkins/jenkins"
-  tag: "2.303.3-jdk11"
-  imagePullPolicy: "Always"
+  image: "alsxs/cikoriy23033"
+  tag: "latest"
+  imagePullPolicy: IfNotPresent
   imagePullSecretName:
   # Optionally configure lifetime for controller-container
   lifecycle:
@@ -234,6 +234,7 @@ controller:
     - configuration-as-code:1.54
     - docker-pipeline:1.26
     - kubernetes-cli:1.10.3
+    - docker-workflow:1.26
 
   # Set to false to download the minimum required version of all dependencies.
   installLatestPlugins: true
@@ -577,8 +578,8 @@ agent:
   kubernetesReadTimeout: 15
   maxRequestsPerHostStr: "32"
   namespace:
-  image: "jenkins/inbound-agent"
-  tag: "4.6-1"
+  image: "alsxs/cikoriyagent4103:latest"
+  tag: "latest"
   workingDir: "/home/jenkins/agent"
   nodeUsageMode: "NORMAL"
   customJenkinsLabels: []
