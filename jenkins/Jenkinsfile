@@ -1,8 +1,8 @@
 pipeline {
-    agent {label 'master'}
+    agent any
     triggers { pollSCM('* * * * *') }
     environment {
-		DOCKERHUB_CREDENTIALS=credentials('07c045ac-59a8-44da-8814-f635231cca33')
+		DOCKERHUB_CREDENTIALS=credentials('bee622cc-5aaf-4adc-ba0d-d087da5cfeb0')
 	}
     stages {
 
@@ -46,7 +46,7 @@ pipeline {
 		stage('Kubernetes') {
             steps {
                 echo " ============== Change app-deploy =================="
-                withKubeConfig([credentialsId: 'kuber-cred', serverUrl: 'https://53D7F93D6B0A38993DC56FC913D2EF9E.gr7.eu-central-1.eks.amazonaws.com', namespace: "default"]) {
+                withKubeConfig([credentialsId: 'd49183dd-92b5-4bd1-b825-fbbe1a2a58f4', serverUrl: 'https://8BE1E636BA135569A5ACEC96BBC25084.gr7.eu-central-1.eks.amazonaws.com', namespace: "default"]) {
                     sh "kubectl delete deploy app-deployment"
                     sh "kubectl delete app-dip"
                     sh "kubectl apply -f kube/kube_app.yaml"

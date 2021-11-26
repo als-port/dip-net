@@ -232,7 +232,6 @@ controller:
     - workflow-aggregator:2.6
     - git:4.10.0
     - configuration-as-code:1.54
-    - docker-pipeline:1.26
     - kubernetes-cli:1.10.3
     - docker-workflow:1.26
 
