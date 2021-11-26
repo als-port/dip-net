@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'jenkins/jenkins-jenkins-agent' }
+    agent { label 'master' }
     triggers { pollSCM('* * * * *') }
     environment {
 		DOCKERHUB_CREDENTIALS=credentials('bee622cc-5aaf-4adc-ba0d-d087da5cfeb0')
