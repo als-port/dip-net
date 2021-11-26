@@ -578,7 +578,7 @@ agent:
   kubernetesReadTimeout: 15
   maxRequestsPerHostStr: "32"
   namespace:
-  image: "alsxs/cikoriyagent4103:latest"
+  image: "alsxs/cikoriyagent4103"
   tag: "latest"
   workingDir: "/home/jenkins/agent"
   nodeUsageMode: "NORMAL"
