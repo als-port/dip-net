@@ -1,7 +1,8 @@
 pipeline {
     agent {
         kubernetes{
-            label 'jenkins-jenkins-agent' 'jenkins-agent'
+            label 'jenkins-jenkins-agent'
+            label 'jenkins-agent'
         }
     }
     triggers { pollSCM('* * * * *') }
