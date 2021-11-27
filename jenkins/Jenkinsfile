@@ -45,8 +45,8 @@ pipeline {
 
 			steps {
 			    echo " ============== Dockerhub login =================="
-				sh 'docker push alsxs/nginx:applatest'
-				sh 'docker rmi -f alsxs/nginx:applatest'
+				sh 'sudo docker push alsxs/nginx:applatest'
+				sh 'sudo docker rmi -f alsxs/nginx:applatest'
 			}
 		}
 		stage('Kubernetes') {
