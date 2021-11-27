@@ -50,8 +50,10 @@ pipeline {
 		stage('Kubernetes') {
             steps {
                 echo " ============== Change app-deploy =================="
-                withKubeConfig([credentialsId: '26b28f52-0e05-4504-be81-c0a8e85cb406', serverUrl: 'https://3F819F8F7E5C8FE3DC2DD201132A33BB.gr7.eu-central-1.eks.amazonaws.com', namespace: "default"]) {
-                    sh "kubectl delete deploy app-deployment"
+                withKubeConfig([credentialsId: '5711acea-40f4-4509-84a1-31905eefd83d']) {
+                    sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"'
+                    sh 'chmod u+x ./kubectl'
+                    sh 'kubectl delete deploy app-deployment'
                     sh "kubectl delete app-dip"
                     sh "kubectl apply -f kube/kube_app.yaml"
                 }
