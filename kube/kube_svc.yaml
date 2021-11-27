@@ -4,15 +4,15 @@ metadata:
   labels:
     app: app-dip
   name: app-dip
-  annotations:
-    service.beta.kubernetes.io/aws-load-balancer-type: nlb
-    service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: 'true'
+  #annotations:
+  #  service.beta.kubernetes.io/aws-load-balancer-type: elb
+  #  service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: 'true'
 
 spec:
   type: LoadBalancer
   ports:
   - protocol: TCP
     port: 80
-    #targetPort: http
+    targetPort: 80
   selector:
     app: app-dip
