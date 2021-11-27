@@ -50,7 +50,6 @@ pipeline {
                     ]) {
                         sh 'kubectl delete deploy app-deployment'
                         sh "kubectl delete svc app-dip"
-                        sh 'kubectl apply view-last-applied service -lapp=app -o json'
                         sh "kubectl apply -f kube/kube_app.yaml"
                         sh "kubectl apply -f kube/kube_svc.yaml"
 
