@@ -18,8 +18,6 @@ pipeline {
 
 			    echo " ============== gitclone =================="
 				git 'https://github.com/als-port/dip-net.git'
-				sh 'sudo chown jenkins:jenkins /home/jenkins/.docker -R'
-				sh 'sudo chmod g+rwx "$HOME/.docker" -R'
 			}
 		}
 
@@ -37,7 +35,7 @@ pipeline {
 
 			steps {
 			    echo " ============== Dockerhub login =================="
-				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
 			}
 		}
 

@@ -77,3 +77,6 @@ pipeline {
 #			sh 'docker logout'
 #		}
 #	}
+
+sh 'sudo chown jenkins:jenkins /home/jenkins/.docker -R'
+				sh 'sudo chmod g+rwx "$HOME/.docker" -R'
