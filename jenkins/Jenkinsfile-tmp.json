@@ -80,3 +80,17 @@ pipeline {
 
 sh 'sudo chown jenkins:jenkins /home/jenkins/.docker -R'
 				sh 'sudo chmod g+rwx "$HOME/.docker" -R'
+
+
+		stage('Kubernetes') {
+            steps {
+                echo " ============== Change app-deploy =================="
+                withKubeConfig([credentialsId: '871301e2-acf3-4c85-9a94-aa674ab0cc1c']) {
+
+                    sh 'kubectl delete deploy app-deployment'
+                    sh "kubectl delete app-dip"
+                    sh "kubectl apply -f kube/kube_app.yaml"
+                }
+            }
+        }
+	}
