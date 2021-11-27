@@ -28,7 +28,7 @@ pipeline {
 			steps {
 			    echo " ============== Build =================="
 			    dir ('app') {
-				    sh 'docker build -t alsxs/nginx:applatest .'
+				    sh 'sudo docker build -t alsxs/nginx:applatest .'
 				}
 			}
 		}
