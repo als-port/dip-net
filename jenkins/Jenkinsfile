@@ -42,7 +42,7 @@ pipeline {
 		stage('Kubernetes') {
             steps {
                 echo " ============== Change app-deploy =================="
-                withKubeCredentials(kubectlCredentials: '5711acea-40f4-4509-84a1-31905eefd83d') {
+                withKubeCredentials([kubectlCredentials: '5711acea-40f4-4509-84a1-31905eefd83d']) {
                     sh 'kubectl delete deploy app-deployment'
                     sh "kubectl delete app-dip"
                     sh "kubectl apply -f kube/kube_app.yaml"
