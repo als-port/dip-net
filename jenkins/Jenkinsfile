@@ -49,10 +49,7 @@ pipeline {
                     namespace: 'default'
                     ]) {
                         sh 'kubectl delete deploy app-deployment'
-                        sh "kubectl delete svc app-dip"
                         sh "kubectl apply -f kube/kube_app.yaml"
-                        sh "kubectl apply -f kube/kube_svc.yaml"
-
                 }
             }
         }
