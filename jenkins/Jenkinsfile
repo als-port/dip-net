@@ -42,11 +42,17 @@ pipeline {
 		stage('Kubernetes') {
             steps {
                 echo " ============== Change app-deploy =================="
-                 withKubeConfig([credentialsId: '5711acea-40f4-4509-84a1-31905eefd83d', serverUrl: 'https://3F819F8F7E5C8FE3DC2DD201132A33BB.gr7.eu-central-1.eks.amazonaws.com'])  {
-                    sh 'kubectl delete deploy app-deployment'
-                    sh "kubectl delete app-dip"
-                    sh "kubectl apply -f kube/kube_app.yaml"
+                withKubeConfig([credentialsId: 'ef474ddb-202f-44fe-a92d-a467e72efab3',
+                    caCertificate: 'LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM1ekNDQWMrZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1URXlOakl4TkRNME1Gb1hEVE14TVRFeU5ESXhORE0wTUZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTW9qClBlZm5BNS9JbWJOV2JrbVVEWkxWM1h0RldzZCtCbngxTzlBZ1RZcUZNOHcvOGJ2WDZKVmcrekJOVVN5MWhRNFoKSDdGUmhmb1p0eTF4WHUxby9yUnVkUDJBYW9La2lFWEVlSUZyaG5EWG9iUEhVZTAxZ0NYZldPSzF5dlpvMzRpcwpQMytPSzBVM25DU1VuL2V6R2NFU3V6L0MrNUZqSEJqZlhNbkkxTDJ2Vkh1ZjFHVXVGa1U5b0JYUmxMZHkyc1JxClNMNHRkRXFWcWRSVkc5RUVQVG5BN2JQWEIxTTRGMDNidG5SRWMzZnBYQnlyQ2M2TWxvK25aaTFMK0grcUhpekkKeDdxQVZmc09ocGIvMlFPbDRyR2ZIV21uM1VKMlJpUUc2ZW9MK21VZGhLR2ZHN1I3T3Z2VjB0WWJNQWYxbkNuMgpqL0VqbGNtWUZ4aHAxTTlVWHM4Q0F3RUFBYU5DTUVBd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZESXRTbWNiUVFuREdLbmFpN3dRTElpZVVOeUZNQTBHQ1NxR1NJYjMKRFFFQkN3VUFBNElCQVFBMkQ1MGREbWJCeDBQcU5ldFN1M1pXVWpXNmxGbjFNb2dLNE44QzNKRWR3V0lXNS81YgpmWWR2ZmVKTVNabVNZTHhSQWJwMU9qb0Nld1dabWVhNnBsS0xQdEJ5bFpvazJmc3poMG1ISWJoUmw0UUNGZGdmCmdnZDlCelRONFZWRTZUNHVKK1VFVThpbUFlRmtVY1BZWVpKeXlEenFkOURCclRac1VZV2oxVlh0NUV2SWk4SVIKOHFVanp0OFBBMlI5RnIyMzNRWE5QVWJGZkFtN0p2M1Bmdk1KMWpuS1RSSVhLdFJjNllFUkNJQitVMys2Qy84cgo5b0lGaWM0MEtkTU1wZW9DRm9kbGxqNERqQm1sM0lQRDBYQzlQOHo1YkcyenptMHIwV1BrYkkrakV4akFqTlozCkFNTDEwOGEvL2ZYeUtDYjFxYytBeFZUc2twL1l5LzNEaVFaRQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==',
+                    serverUrl: 'https://3F819F8F7E5C8FE3DC2DD201132A33BB.gr7.eu-central-1.eks.amazonaws.com',
+                    contextName: 'arn:aws:eks:eu-central-1:336639867151:cluster/dip-net-cluster',
+                    clusterName: 'dip-net-cluster',
+                    namespace: 'default'
+                    ]) {
+                        sh 'kubectl get pods'
                 }
+
+
 
 
 
