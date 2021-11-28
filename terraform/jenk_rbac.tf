@@ -1,17 +1,17 @@
-resource "kubernetes_service_account" "jenkins_svsacc" {
-    metadata {
-      name = "jenkins"
-    }
-    secret {
-    name = kubernetes_secret.jenkins_svsacc_secr.metadata.0.name
-    }
-}
-
-resource "kubernetes_secret" "jenkins_svsacc_secr" {
-  metadata {
-    name = "jenkins"
-  }
-}
+//resource "kubernetes_service_account" "jenkins_svsacc" {
+//    metadata {
+//      name = "jenkins"
+//    }
+//    secret {
+//    name = kubernetes_secret.jenkins_svsacc_secr.metadata.0.name
+//    }
+//}
+//
+//resource "kubernetes_secret" "jenkins_svsacc_secr" {
+//  metadata {
+//    name = "jenkins"
+//  }
+//}
 
 
 resource "kubernetes_cluster_role" "jenkins_svsacc_role" {
