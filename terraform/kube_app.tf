@@ -21,7 +21,6 @@ resource "kubernetes_deployment" "app-deployment" {
           app = "app-dip"
         }
       }
-
       spec {
         container {
           image = "alsxs/nginx:alpineapp"
