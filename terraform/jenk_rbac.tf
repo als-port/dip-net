@@ -72,19 +72,19 @@ resource "kubernetes_cluster_role" "jenkins_svsacc_role" {
 
 }
 
-resource "kubernetes_cluster_role_binding" "jenkins_svsacc_role_bind" {
-  metadata {
-    name = "jenkins"
-  }
-  role_ref {
-    api_group = "rbac.authorization.k8s.io"
-    kind      = "ClusterRole"
-    name      = "jenkins"
-  }
-  subject {
-    kind      = "ServiceAccount"
-    name      = "jenkins"
-    namespace = "default"
-  }
-
-}
+//resource "kubernetes_cluster_role_binding" "jenkins_svsacc_role_bind" {
+//  metadata {
+//    name = "jenkins"
+//  }
+//  role_ref {
+//    api_group = "rbac.authorization.k8s.io"
+//    kind      = "ClusterRole"
+//    name      = "jenkins"
+//  }
+//  subject {
+//    kind      = "ServiceAccount"
+//    name      = "jenkins"
+//    namespace = "default"
+//  }
+//
+//}
