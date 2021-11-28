@@ -108,7 +108,7 @@ Jenkins, (доступен извне по имени балансировщик
 ![Jenkins1](https://github.com/als-port/dip-net/blob/main/pics/jenkins_out_fin.png)  
   
 Этапы  
-![Jenkins2](https://github.com/als-port/dip-net/blob/main/pics/jenkins_stages.png)  
+![Jenkins2](https://github.com/als-port/dip-net/blob/main/pics/jenkins_stages_cr.png)  
   
   
   
