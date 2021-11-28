@@ -17,13 +17,26 @@
 //}
 
 
+//terraform {
+//  backend "s3" {
+//    bucket         = "s3buck151121"
+//    key            = "terraform.tfstate"
+//    region         = "eu-central-1"
+//    #dynamodb_table = "db_terraform_locks"
+//
+//  }
+//}
+
+
 terraform {
-  backend "s3" {
-    bucket         = "s3buck151121"
-    key            = "terraform.tfstate"
-    region         = "eu-central-1"
-    #dynamodb_table = "db_terraform_locks"
+  backend "remote" {
+    hostname = "app.terraform.io"
+    organization = "diplom-netology"
 
+    workspaces {
+      name = "stage"
+    }
   }
-}
 
+  required_version = ">= 0.12.0"
+}
