@@ -16,6 +16,9 @@ spec:
     spec:
       containers:
       - name: app-dip
-        image: alsxs/nginx:${BUILD_TIMESTAMP}
+        env:
+        - name: BUILD_TIMESTAMP
+          value: "{{ lookup('env', 'BUILD_TIMESTAMP') }}"
+        image: alsxs/nginx:$(BUILD_TIMESTAMP)
         ports:
         - containerPort: 80
