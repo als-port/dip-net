@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: app-dip
-        image: alsxs/nginx:alpineapp
+        image: alsxs/nginx:${BUILD_TIMESTAMP}
         ports:
         - containerPort: 80
