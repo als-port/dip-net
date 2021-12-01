@@ -6,7 +6,7 @@ pipeline {
     }
     triggers { pollSCM('* * * * *') }
     environment {
-		DOCKERHUB_CREDENTIALS=credentials('eaf9a39f-38ec-4de5-b551-8a1a75867295')
+		DOCKERHUB_CREDENTIALS=credentials('bf5cd4ea-e9fb-45d3-8f95-9ec6e87c403a')
 	}
     stages {
 
@@ -44,8 +44,8 @@ pipeline {
 		stage('Kubernetes') {
             steps {
                 echo " ============== Change app-deploy =================="
-                withKubeConfig([credentialsId: '0f4c638b-d6db-48c1-8019-9e9a51ba0ca3',
-                    serverUrl: 'https://6ABC7E386D19709A2E7511AE3EDBC0D9.gr7.eu-central-1.eks.amazonaws.com',
+                withKubeConfig([credentialsId: '80f5cadc-29f3-4359-af11-3dbde86b79bc',
+                    serverUrl: 'https://2DB9EDF870B5A976774E63E42F7C004B.sk1.eu-central-1.eks.amazonaws.com',
                     contextName: 'arn:aws:eks:eu-central-1:336639867151:cluster/dip-net-cluster',
                     clusterName: 'dip-net-cluster',
                     namespace: 'default'
