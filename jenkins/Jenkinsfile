@@ -49,29 +49,30 @@ pipeline {
                     namespace: 'default'
                     ]) {
                         sh 'kubectl delete deploy app-deployment'
-                        sh "cat <<EOF | kubectl apply -f -
-                        apiVersion: apps/v1
-                        kind: Deployment
-                        metadata:
-                          name: app-deployment
-                          labels:
-                            app: app-dip
-                        spec:
-                          replicas: 3
-                          selector:
-                            matchLabels:
-                              app: app-dip
-                          template:
-                            metadata:
-                              labels:
-                                app: app-dip
-                            spec:
-                              containers:
-                              - name: app-dip
-                                image: alsxs/nginx:${BUILD_TIMESTAMP}
-                                ports:
-                                - containerPort: 80
-                        EOF"
+                        sh \
+'cat <<EOF | kubectl apply -f -
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+  labels:
+    app: app-dip
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: app-dip
+  template:
+    metadata:
+      labels:
+        app: app-dip
+    spec:
+      containers:
+      - name: app-dip
+        image: alsxs/nginx:${BUILD_TIMESTAMP}
+        ports:
+        - containerPort: 80
+EOF'
                 }
             }
         }
