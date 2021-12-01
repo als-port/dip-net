@@ -55,6 +55,11 @@ resource "kubernetes_cluster_role" "jenkins_svsacc_role" {
     verbs      = ["create","delete","get","list","patch","update"]
   }
   rule {
+    api_groups = ["apps"]
+    resources  = ["deployments/scale"]
+    verbs      = ["create","delete","get","list","patch","update"]
+  }
+  rule {
     api_groups = [""]
     resources  = ["statefulset"]
     verbs      = ["create","delete","get","list","patch","update"]
