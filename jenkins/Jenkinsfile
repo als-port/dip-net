@@ -31,11 +31,12 @@ pipeline {
 			}
 		}
 
-		stage('Login') {
+		stage('Login + push') {
 
 			steps {
-			    echo " ============== Dockerhub login =================="
+			    echo " ============== Dockerhub login + push =================="
 				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+				sh 'sudo docker push alsxs/nginx:app${BUILD_TIMESTAMP}'
 			}
 		}
 
@@ -49,7 +50,7 @@ pipeline {
                     namespace: 'default'
                     ]) {
                         sh 'kubectl delete deploy app-dip'
-                        sh 'kubectl create deployment app-dip --image=alsxs/nginx:a${BUILD_TIMESTAMP} --port=80'
+                        sh 'kubectl create deployment app-dip --image=alsxs/nginx:app${BUILD_TIMESTAMP} --port=80'
                         sh 'kubectl scale deployment app-dip --replicas 3'
                 }
             }
