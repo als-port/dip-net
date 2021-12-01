@@ -26,7 +26,7 @@ pipeline {
 			steps {
 			    echo " ============== Build =================="
 			    dir ('app') {
-				    sh 'sudo docker build -t alsxs/nginx:${BUILD_TIMESTAMP} .'
+				    sh 'sudo docker build -t alsxs/nginx:a${BUILD_TIMESTAMP} .'
 				}
 			}
 		}
@@ -49,7 +49,7 @@ pipeline {
                     namespace: 'default'
                     ]) {
                         sh 'kubectl delete deploy app-dip'
-                        sh 'kubectl create deployment app-dip --image=alsxs/nginx:${BUILD_TIMESTAMP} --port=80'
+                        sh 'kubectl create deployment app-dip --image=alsxs/nginx:a${BUILD_TIMESTAMP} --port=80'
                         sh 'kubectl scale deployment app-dip --replicas 3'
                 }
             }
