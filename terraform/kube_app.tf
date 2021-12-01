@@ -1,6 +1,6 @@
 resource "kubernetes_deployment" "app-deployment" {
   metadata {
-    name = "app-deployment"
+    name = "app-dip"
     labels = {
       app = "app-dip"
     }
