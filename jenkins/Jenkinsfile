@@ -36,6 +36,7 @@ pipeline {
 			steps {
 			    echo " ============== Dockerhub login + push =================="
 				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+				sh 'sudo docker tag alsxs/nginx:app${BUILD_TIMESTAMP} alsxs/nginx:app${BUILD_TIMESTAMP}'
 				sh 'sudo docker push alsxs/nginx:app${BUILD_TIMESTAMP}'
 			}
 		}
