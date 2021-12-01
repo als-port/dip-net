@@ -48,7 +48,7 @@ pipeline {
                     clusterName: 'dip-net-cluster',
                     namespace: 'default'
                     ]) {
-                        sh 'kubectl delete deploy app-deployment'
+                        sh 'kubectl delete deploy app-dip'
                         sh 'kubectl create deployment app-dip --image=alsxs/nginx:${BUILD_TIMESTAMP} --port=80'
                         sh 'kubectl scale deployment app-dip --replicas 3'
                 }
