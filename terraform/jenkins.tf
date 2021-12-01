@@ -38,3 +38,4 @@ resource "helm_release" "jenkins" {
 #https://www.youtube.com/watch?v=0D_wKERZ2zo
 #https://github.com/ksemaev/project_template/blob/master/jenkinsfiles/docker_build.jenkins
 #https://github.com/shazforiot/How-to-Push-docker-image-to-Docker-Hub-using-Jenkins-Pipeline/blob/main/Jenkinsfile
+#kubectl create deployment app-deployment --image=alsxs/nginx:${BUILD_TIMESTAMP} --port=80 && kubectl scale deployment app-deployment --replicas=3

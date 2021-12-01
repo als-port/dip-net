@@ -49,8 +49,29 @@ pipeline {
                     namespace: 'default'
                     ]) {
                         sh 'kubectl delete deploy app-deployment'
-                        sh 'kubectl create deployment app-deployment --image=alsxs/nginx:${BUILD_TIMESTAMP} -l app=app-dip --port=80 && kubectl scale deployment app-deployment --replicas=3'
-
+                        sh 'cat <<EOF | kubectl apply -f -
+                        apiVersion: apps/v1
+                        kind: Deployment
+                        metadata:
+                          name: app-deployment
+                          labels:
+                            app: app-dip
+                        spec:
+                          replicas: 3
+                          selector:
+                            matchLabels:
+                              app: app-dip
+                          template:
+                            metadata:
+                              labels:
+                                app: app-dip
+                            spec:
+                              containers:
+                              - name: app-dip
+                                image: alsxs/nginx:${BUILD_TIMESTAMP}
+                                ports:
+                                - containerPort: 80
+                        EOF'
                 }
             }
         }
