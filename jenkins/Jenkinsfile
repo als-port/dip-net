@@ -49,7 +49,8 @@ pipeline {
                     namespace: 'default'
                     ]) {
                         sh 'kubectl delete deploy app-deployment'
-                        sh "kubectl apply -f kube/kube_app.yaml"
+                        sh 'kubectl create deployment app-deployment --image=alsxs/nginx:${BUILD_TIMESTAMP} -l app=app-dip --port=80 && kubectl scale deployment app-deployment --replicas=3'
+
                 }
             }
         }
