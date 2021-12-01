@@ -50,7 +50,7 @@ pipeline {
                     ]) {
                         sh 'kubectl delete deploy app-deployment'
                         sh \
-'cat <<EOF | kubectl apply -f -
+'cat <<EOF | sudo tee kube_app.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -73,6 +73,7 @@ spec:
         ports:
         - containerPort: 80
 EOF'
+                    sh 'kubectl apply -f kube_app.yaml'
                 }
             }
         }
